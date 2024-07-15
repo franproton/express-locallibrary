@@ -1,0 +1,24 @@
+extends layout
+
+block content 
+
+  h1 #{title}
+
+  if to_check.length
+
+    p #[strong Delete the following objects before attempting to delete.]
+    div(style='margin-left:20px;margin-top:20px')
+      h4 To delete:
+      dl
+        each instance in to_check
+          dt
+            a(href=instance.url) #{instance.title}
+
+  else
+    p Do you really want to delete this #{pretty_type}?
+
+    form(method='POST')
+      div.form-group
+        input.form-control(id=computing_type type='hidden', name=computing_type, value=to_delete._id )
+
+      button.btn.btn-primary(type='submit') Delete
